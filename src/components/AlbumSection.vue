@@ -16,6 +16,16 @@ export default {
       albums: [],
     };
   },
+  mounted() {
+    axios("https://flynn.boolean.careers/exercises/api/array/music")
+      .then((res) => {
+        this.albums = res.data.response;
+        console.log(this.albums);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
 };
 </script>
 
