@@ -1,7 +1,7 @@
 <template>
-  <section class="container">
+  <section class="container p-0">
     <header>
-      <figure class="m-0"><img class="img-fluid" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
+      <figure class="m-0"><img class="img-fluid m-3" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
     </header>
   </section>
 </template>
@@ -15,7 +15,6 @@ export default {
 <style scoped lang="scss">
 header {
   background-color: #2e3a46;
-  padding: 10px;
 
   figure {
     width: 150px;
