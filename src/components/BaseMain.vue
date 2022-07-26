@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <AlbumSection />
+    <AlbumSection :list-of-albums="ListOfAlbums" />
   </main>
 </template>
 
@@ -10,6 +10,9 @@ export default {
   name: "BaseMain",
   components: {
     AlbumSection,
+  },
+  props: {
+    ListOfAlbums: Array,
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <section id="album-section" class="w-100">
     <ul class="p-0 m-0 d-flex flex-wrap">
-      <li v-for="(album, i) in albums" :key="i">
+      <li v-for="(album, i) in ListOfAlbums" :key="i">
         <figure class="m-0">
           <img class="img-fluid h-100 w-100" :src="album.poster" :alt="album.title" />
         </figure>
@@ -18,33 +18,10 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "AlbumSection",
-  data() {
-    return {
-      albums: [],
-      url: "https://flynn.boolean.careers/exercises/api/array/music",
-    };
-  },
-  methods: {
-    // Metodo che preleva i dati forniti da una precisa API passata
-    // come parametro
-    getAlbumFromAPI(url) {
-      axios(url)
-        .then((res) => {
-          this.albums = res.data.response;
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-        .then(() => {});
-    },
-  },
-  mounted() {
-    // Richiamiamo la funzione che al mounted di Vue preleva i dati
-    this.getAlbumFromAPI(this.url);
+  props: {
+    ListOfAlbums: Array,
   },
 };
 </script>

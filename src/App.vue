@@ -1,18 +1,45 @@
 <template>
   <div>
     <BaseHeader />
-    <BaseMain />
+    <BaseMain :list-of-albums="albums" />
   </div>
 </template>
 
 <script>
 import BaseHeader from "./components/BaseHeader.vue";
 import BaseMain from "./components/BaseMain.vue";
+
+// Importiamo axios per effettuare la chiamata
+import axios from "axios";
 export default {
   name: "App",
   components: {
     BaseHeader,
     BaseMain,
+  },
+  data() {
+    return {
+      albums: [],
+      url: "https://flynn.boolean.careers/exercises/api/array/music",
+    };
+  },
+  methods: {
+    // Metodo che preleva i dati forniti da una precisa API passata
+    // come parametro
+    getAlbumFromAPI(url) {
+      axios(url)
+        .then((res) => {
+          this.albums = res.data.response;
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .then(() => {});
+    },
+  },
+  mounted() {
+    // Richiamiamo la funzione che al mounted di Vue preleva i dati
+    this.getAlbumFromAPI(this.url);
   },
 };
 </script>
