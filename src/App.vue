@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseHeader :albums-genres="albumsGenres" :authors="authors" @genre-selected="changeGenre" />
+    <BaseHeader :albums-genres="albumsGenres" :authors="authors" @genre-selected="changeGenre" @author-selected="changeAuthor" />
     <BaseMain :list-of-albums="filterAlbums" />
   </div>
 </template>
@@ -51,6 +51,10 @@ export default {
     getGenre() {
       this.authors = this.albums.map((album) => album.author);
       this.authors = this.deleteDuplicateArrayElement(this.authors);
+    },
+    changeAuthor(author) {
+      this.author = author;
+      console.log(this.author);
     },
     changeGenre(genre) {
       this.genre = genre;

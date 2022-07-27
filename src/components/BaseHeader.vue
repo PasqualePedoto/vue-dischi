@@ -2,8 +2,8 @@
   <section class="p-0 container">
     <header>
       <figure class="m-0"><img class="img-fluid m-3" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
-      <BaseSelect :array="AlbumsGenres" @selected="choiceSelected" />
-      <BaseSelect :array="authors" @selected="choiceSelected" />
+      <BaseSelect :array="AlbumsGenres" @selected="genreSelected" />
+      <BaseSelect :array="authors" @selected="authorSelected" />
     </header>
   </section>
 </template>
@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       genre: "",
+      author: "",
     };
   },
   props: {
@@ -23,9 +24,13 @@ export default {
     authors: Array,
   },
   methods: {
-    choiceSelected(element) {
+    genreSelected(element) {
       this.genre = element;
       this.$emit("genre-selected", this.genre);
+    },
+    authorSelected(element) {
+      this.author = element;
+      this.$emit("author-selected", this.author);
     },
   },
 };
