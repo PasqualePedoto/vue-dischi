@@ -2,8 +2,8 @@
   <section class="p-0 container">
     <header>
       <figure class="m-0"><img class="img-fluid m-3" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
-      <BaseSelect :albums-genres="AlbumsGenres" @genre-selected="genreSelected" />
-      <BaseSelect :albums-genres="AlbumsGenres" @genre-selected="genreSelected" />
+      <BaseSelect :array="AlbumsGenres" @selected="choiceSelected" />
+      <BaseSelect :array="authors" @selected="choiceSelected" />
     </header>
   </section>
 </template>
@@ -20,10 +20,11 @@ export default {
   },
   props: {
     AlbumsGenres: Array,
+    authors: Array,
   },
   methods: {
-    genreSelected(genre) {
-      this.genre = genre;
+    choiceSelected(element) {
+      this.genre = element;
       this.$emit("genre-selected", this.genre);
     },
   },

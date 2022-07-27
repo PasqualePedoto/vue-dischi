@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseHeader :albums-genres="albumsGenres" @genre-selected="changeGenre" />
+    <BaseHeader :albums-genres="albumsGenres" :authors="authors" @genre-selected="changeGenre" />
     <BaseMain :list-of-albums="filterAlbums" />
   </div>
 </template>

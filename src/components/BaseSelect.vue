@@ -1,7 +1,7 @@
 <template>
-  <select v-model="genreSelected" class="form-select" @change="emitGenre" aria-label="Default select example">
+  <select v-model="selected" class="form-select" @change="emitSelect" aria-label="Default select example">
     <option value="" selected>-- --</option>
-    <option v-for="(genre, i) in AlbumsGenres" :key="i" :value="genre">{{ genre }}</option>
+    <option v-for="(element, i) in array" :key="i" :value="element">{{ element }}</option>
   </select>
 </template>
 
@@ -9,16 +9,16 @@
 export default {
   name: "BaseHeader",
   props: {
-    AlbumsGenres: Array,
+    array: Array,
   },
   data() {
     return {
-      genreSelected: "",
+      selected: "",
     };
   },
   methods: {
-    emitGenre() {
-      this.$emit("genre-selected", this.genreSelected);
+    emitSelect() {
+      this.$emit("selected", this.selected);
     },
   },
 };
