@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       albums: [],
+      albumsGenres: [],
       url: "https://flynn.boolean.careers/exercises/api/array/music",
     };
   },
@@ -30,11 +31,17 @@ export default {
       axios(url)
         .then((res) => {
           this.albums = res.data.response;
+          this.albumsGenres = this.albums.map((album) => album.genre);
+          this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
         })
         .catch((err) => {
           console.error(err);
         })
         .then(() => {});
+    },
+    deleteDuplicateArrayElement(array) {
+      array = array.filter((genre, index) => array.indexOf(genre) === index);
+      return array;
     },
   },
   mounted() {
