@@ -31,13 +31,17 @@ export default {
       axios(url)
         .then((res) => {
           this.albums = res.data.response;
-          this.albumsGenres = this.albums.map((album) => album.genre);
-          this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
+          // Preleviamo i generi
+          this.getGenre();
         })
         .catch((err) => {
           console.error(err);
         })
         .then(() => {});
+    },
+    getGenre() {
+      this.albumsGenres = this.albums.map((album) => album.genre);
+      this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
     },
     deleteDuplicateArrayElement(array) {
       array = array.filter((genre, index) => array.indexOf(genre) === index);
