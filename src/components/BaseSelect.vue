@@ -1,15 +1,16 @@
 <template>
   <select class="form-select" aria-label="Default select example">
     <option>-- --</option>
-    <option value="1" selected>One</option>
-    <option value="2">Two</option>
-    <option value="3">Three</option>
+    <option v-for="(genre, i) in AlbumsGenres" :key="i" :value="genre" selected>{{ genre }}</option>
   </select>
 </template>
 
 <script>
 export default {
   name: "BaseHeader",
+  props: {
+    AlbumsGenres: Array,
+  },
 };
 </script>
 

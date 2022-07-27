@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseHeader />
+    <BaseHeader :albums-genres="albumsGenres" />
     <BaseMain :list-of-albums="albums" />
   </div>
 </template>
