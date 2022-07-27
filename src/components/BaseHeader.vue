@@ -2,7 +2,7 @@
   <section class="p-0 container">
     <header>
       <figure class="m-0"><img class="img-fluid m-3" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
-      <BaseSelect :albums-genres="AlbumsGenres" />
+      <BaseSelect :albums-genres="AlbumsGenres" @genre-selected="genreSelected" />
     </header>
   </section>
 </template>
@@ -12,8 +12,19 @@ import BaseSelect from "./BaseSelect.vue";
 export default {
   name: "BaseHeader",
   components: { BaseSelect },
+  data() {
+    return {
+      genre: "",
+    };
+  },
   props: {
     AlbumsGenres: Array,
+  },
+  methods: {
+    genreSelected(genre) {
+      this.genre = genre;
+      this.$emit("genre-selected", this.genre);
+    },
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <BaseHeader :albums-genres="albumsGenres" />
-    <BaseMain :list-of-albums="albums" />
+    <BaseHeader :albums-genres="albumsGenres" @genre-selected="changeGenre" />
+    <BaseMain :list-of-albums="filterAlbums" />
   </div>
 </template>
 
@@ -20,7 +20,9 @@ export default {
   data() {
     return {
       albums: [],
+      filterAlbums: [],
       albumsGenres: [],
+      genre: "",
       url: "https://flynn.boolean.careers/exercises/api/array/music",
     };
   },
@@ -30,7 +32,7 @@ export default {
     getAlbumFromAPI(url) {
       axios(url)
         .then((res) => {
-          this.albums = res.data.response;
+          this.filterAlbums = this.albums = res.data.response;
           // Preleviamo i generi
           this.getGenre();
         })
@@ -43,11 +45,19 @@ export default {
       this.albumsGenres = this.albums.map((album) => album.genre);
       this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
     },
+    changeGenre(genre) {
+      console.log("genere cambiato");
+      this.genre = genre;
+
+      if (this.genre === "") this.filterAlbums = this.albums.map((album) => album);
+      else this.filterAlbums = this.albums.filter((album) => album.genre === this.genre);
+    },
     deleteDuplicateArrayElement(array) {
       array = array.filter((genre, index) => array.indexOf(genre) === index);
       return array;
     },
   },
+  computed: {},
   mounted() {
     // Richiamiamo la funzione che al mounted di Vue preleva i dati
     this.getAlbumFromAPI(this.url);
