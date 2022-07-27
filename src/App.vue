@@ -23,6 +23,7 @@ export default {
       filterAlbums: [],
       albumsGenres: [],
       genre: "",
+      authors: [],
       url: "https://flynn.boolean.careers/exercises/api/array/music",
     };
   },
@@ -35,18 +36,23 @@ export default {
           this.filterAlbums = this.albums = res.data.response;
           // Preleviamo i generi
           this.getGenre();
+          this.getAuthors();
         })
         .catch((err) => {
           console.error(err);
         })
         .then(() => {});
     },
-    getGenre() {
+    getAuthors() {
       this.albumsGenres = this.albums.map((album) => album.genre);
       this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
     },
+
+    getGenre() {
+      this.authors = this.albums.map((album) => album.author);
+      this.authors = this.deleteDuplicateArrayElement(this.authors);
+    },
     changeGenre(genre) {
-      console.log("genere cambiato");
       this.genre = genre;
 
       if (this.genre === "") this.filterAlbums = this.albums.map((album) => album);

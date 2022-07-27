@@ -3,6 +3,7 @@
     <header>
       <figure class="m-0"><img class="img-fluid m-3" src="../assets/image/logo.svg" alt="spotify-logo" /></figure>
       <BaseSelect :albums-genres="AlbumsGenres" @genre-selected="genreSelected" />
+      <BaseSelect :albums-genres="AlbumsGenres" @genre-selected="genreSelected" />
     </header>
   </section>
 </template>
