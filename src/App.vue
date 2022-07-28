@@ -1,7 +1,7 @@
 <template>
   <div>
     <BaseHeader :albums-genres="albumsGenres" :authors="authors" @genre-selected="changeGenre" @author-selected="changeAuthor" />
-    <BaseMain :list-of-albums="filterAlbums" />
+    <BaseMain :list-of-albums="filteredDiscs" />
   </div>
 </template>
 
@@ -62,9 +62,6 @@ export default {
     //Cambio dell'autore in seguito alla scelta della select
     changeAuthor(author) {
       this.author = author;
-
-      if (this.author === "") this.filterAlbums = this.albums.map((album) => album);
-      else this.filterAlbums = this.albums.filter((album) => album.author === this.author);
     },
 
     // Metodo che genera un array contenenti tutti i generi distinti
@@ -77,12 +74,16 @@ export default {
     //Cambio del genere in seguito alla scelta della select
     changeGenre(genre) {
       this.genre = genre;
-
-      if (this.genre === "") this.filterAlbums = this.albums.map((album) => album);
-      else this.filterAlbums = this.albums.filter((album) => album.genre === this.genre);
     },
   },
-  computed: {},
+  computed: {
+    filteredDiscs() {
+      if (this.genre === "" && this.author === "") return this.albums;
+      else if (this.genre === "" && this.author !== "") return this.albums.filter((album) => album.author === this.author);
+      else if (this.genre !== "" && this.author === "") return this.albums.filter((album) => album.genre === this.genre);
+      else return this.albums.filter((album) => album.genre === this.genre && album.author === this.author);
+    },
+  },
   mounted() {
     // Richiamiamo la funzione che al mounted di Vue preleva i dati
     this.getAlbumFromAPI(this.url);
