@@ -43,28 +43,38 @@ export default {
         })
         .then(() => {});
     },
+
+    //Metodo che elimina tutti i dublicati di un array
+    deleteDuplicateArrayElement(array) {
+      array = array.filter((genre, index) => array.indexOf(genre) === index);
+      return array;
+    },
+
+    // Metodo che genera un array contenenti tutti gli autori distinti
+    // così da passarli al BaseSelect che genererà una selezione
+    // basata su questi
     getAuthors() {
       this.albumsGenres = this.albums.map((album) => album.genre);
       this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
     },
+    //Cambio dell'autore in seguito alla scelta della select
+    changeAuthor(author) {
+      this.author = author;
+    },
 
+    // Metodo che genera un array contenenti tutti i generi distinti
+    // così da passarli al BaseSelect che genererà una selezione
+    // basata su questi
     getGenre() {
       this.authors = this.albums.map((album) => album.author);
       this.authors = this.deleteDuplicateArrayElement(this.authors);
     },
-    changeAuthor(author) {
-      this.author = author;
-      console.log(this.author);
-    },
+    //Cambio del genere in seguito alla scelta della select
     changeGenre(genre) {
       this.genre = genre;
 
       if (this.genre === "") this.filterAlbums = this.albums.map((album) => album);
       else this.filterAlbums = this.albums.filter((album) => album.genre === this.genre);
-    },
-    deleteDuplicateArrayElement(array) {
-      array = array.filter((genre, index) => array.indexOf(genre) === index);
-      return array;
     },
   },
   computed: {},
