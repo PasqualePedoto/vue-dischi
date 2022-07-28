@@ -23,6 +23,7 @@ export default {
       filterAlbums: [],
       albumsGenres: [],
       genre: "",
+      author: "",
       authors: [],
       url: "https://flynn.boolean.careers/exercises/api/array/music",
     };
@@ -57,9 +58,13 @@ export default {
       this.albumsGenres = this.albums.map((album) => album.genre);
       this.albumsGenres = this.deleteDuplicateArrayElement(this.albumsGenres);
     },
+
     //Cambio dell'autore in seguito alla scelta della select
     changeAuthor(author) {
       this.author = author;
+
+      if (this.author === "") this.filterAlbums = this.albums.map((album) => album);
+      else this.filterAlbums = this.albums.filter((album) => album.author === this.author);
     },
 
     // Metodo che genera un array contenenti tutti i generi distinti
